@@ -55,7 +55,7 @@ public class EncryptionPageSTBase implements WebDriverSeleniumTest {
 
     @Rule
     //since we want to use the same browser the whole time pass false and quit the driver in the AfterClass method
-    public static ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(false);
+    public ScreenshotTestRule screenshotTestRule = new ScreenshotTestRule(false);
 
     @Rule
     public ErrorCollector collector = new ErrorCollector();

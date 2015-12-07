@@ -13,7 +13,9 @@ import org.dbunit.dataset.DataSetException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -54,6 +56,9 @@ public class OrdersJpaDaoTest {
     @Inject
     private OrdersDao ordersJpaDao;
 
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
+
     @BeforeClass
     public static void setUpBeforeClass() throws DataSetException, IOException {
         databaseTester = DatabaseTestingUtils.getJndiCleanInsertDeleteAllDatabaseTester(JNDI_DATASOURCE_LOOKUP_NAME, "orders_data.xml", DatabaseType.HSQLDB);
@@ -71,6 +76,13 @@ public class OrdersJpaDaoTest {
 
     @Test(expected = ItemNotFoundException.class)
     public void testSelectByIdNotFound() throws Exception {
+        ordersJpaDao.selectById(TEST_ORDER_ID_NOT_FOUND);
+    }
+
+    @Test
+    public void testSelectByIdNotFound_WithRule() throws Exception {
+        exception.expect(ItemNotFoundException.class);
+        exception.expectMessage(String.format("Unable to find order with id: '%s'", TEST_ORDER_ID_NOT_FOUND));
         ordersJpaDao.selectById(TEST_ORDER_ID_NOT_FOUND);
     }
 
