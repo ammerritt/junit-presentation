@@ -1,0 +1,10 @@
+Schema Gotchas
+
+  If you have been using Oracle and are going to be using HSQL for your JUnit test cases there are a couple of gotchas to consider.
+  It's possible to write sql statements without specifying the schema name and relying on oracle to map the default schema based on 
+  the connecting user for the connection.  This keeps the query a little more abstract and portable.  However default user schemas 
+  are not supported in HSQL (yet... its in their dev branch)  
+  
+  Consider stripping your DBUnit xml files and liquibase changelog of any reference to a schema.  When your database is created and data inserted it will default
+  to the public schema.  This would be a good workaround if you coded your sql queries without declaring schema names.  If you do have schema names in your queries
+  then there is no need to worry and you will need to make sure that your dbunit and liquibase changelog contain schema names.

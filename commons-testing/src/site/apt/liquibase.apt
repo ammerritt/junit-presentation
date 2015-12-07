@@ -1,0 +1,22 @@
+Liquibase Appendix
+
+  Liquibase has some utilities that you can run from the command line to generate a a database schema.  Download the
+  Liquibase core package file from {{http://www.liquibase.org/download}} and extract the files to the folder of your choosing.  We are going to
+  create a changelog file that will be used for creating your database for unit tests.
+  
++------------
+
+   liquibase --driver=oracle.jdbc.OracleDriver \
+      --classpath=\path\to\classes:jdbcdriver.jar \
+      --changeLogFile=com/example/db.changelog.xml \
+      --url="jdbc:oracle:thin:@localhost:1521:XE" \
+      --username=scott \
+      --password=tiger \
+      generateChangeLog
+
+
++------------
+
+  Once you have created your changelog you may need to massage the schema a little bit.  If you are extracting an Oracle database and planning
+  on importing the schema into HSQLDB you will need to replace all the VARCHAR2(?,?) with a simple VARCHAR and you will need to replace all the NUMBER(?,?)
+  to NUMERIC, BIGINT etc and replace FLOAT(?) with FLOAT.  This should be pretty straightforward in remapping the correct types.

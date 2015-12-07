@@ -1,0 +1,15 @@
+<?xml version="1.0"  encoding="ISO-8859-1"?>
+<!-- Note that this is only used for local developer testing and is not deployed in the ear. -->
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTDConfigure//EN" "http://jetty.mortbay.org/configure.dtd">
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+    <Set name="contextPath">/TestingPresentationWebApp</Set>
+    <Get name="securityHandler">
+        <Set name="loginService">
+            <New class="org.eclipse.jetty.security.HashLoginService">
+                <Set name="name">Test Realm</Set>
+                <Set name="config">src/test/resources/dev-realm.properties</Set>
+                <Call name="start"></Call>
+            </New>
+        </Set>
+    </Get>
+</Configure>

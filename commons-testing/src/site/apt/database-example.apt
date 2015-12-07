@@ -1,0 +1,18 @@
+Examples
+
++---------
+
+	@RunWith(GSJUnitRunner.class)
+	@CreateDatabase(databaseFile = "src/test/resources/database.xml", dataSource = "jdbc/hsqlDataSource")
+	@DBUnitInsertClean(dataSource = "jdbc/hsqlDataSource", xmlDirectory = "src/test/resources/dbunit")
+	public class SampleDbTest
+	{
+		
+		@Test
+		public void myTestMethod() {
+		
+		}
+	}
+
+
++------------

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean id="jndi" class="org.apache.xbean.spring.jndi.DefaultContext">
+        <property name="entries">
+            <map>
+                <entry key="java:comp/env/jdbc/hsqlDataSource">
+                    <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+                        <property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+                        <property name="url" value="jdbc:hsqldb:mem:HSQL" />
+                        <property name="username" value="sa" />
+                        <property name="password" value="" />
+                        <property name="maxIdle" value="-1" />
+                        <property name="maxActive" value="1" />
+                        <property name="maxWait" value="-1" />
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+</beans>

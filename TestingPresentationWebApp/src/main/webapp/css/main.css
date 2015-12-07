@@ -1,0 +1,22 @@
+body {
+	background-color: white;	
+}
+
+div.left {
+	float: left;
+	position: relative;
+	text-align: left;
+}
+	
+div.right {
+	float: right;
+	position: relative;
+	text-align:right;
+}
+
+.required {
+	font-family: verdana, helvetica;
+	font-size: 11px;
+	color: red;
+	text-align : left;
+}

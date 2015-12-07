@@ -1,0 +1,12 @@
+Usage
+
+  Add the following dependency to your maven pom file.  As of this writing 1.0.0 is the most current release.
+
++------------
+<dependency>
+  <groupId>com.merritt.commons</groupId>
+  <artifactId>commons-testing</artifactId>
+  <version>1.0.0</version>
+  <scope>test</test>
+</dependency>
++------------

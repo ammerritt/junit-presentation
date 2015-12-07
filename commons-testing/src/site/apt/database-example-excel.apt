@@ -1,0 +1,21 @@
+Examples
+
++---------
+
+	@RunWith(GSJUnitRunner.class)
+	@CreateDatabase(databaseFile = "src/test/resources/database.xml", dataSource = "jdbc/hsqlDataSource")
+	@DBUnitInsertClean(dataSource = "jdbc/hsqlDataSource", xmlDirectory = "src/test/resources/dbunit")
+	public class SampleDbTest
+	{
+		
+		@Test
+		@ExcelDataSource(path = "src/test/resources/MyTestCases.xls", sheetName = "Sheet1")
+		public void myTestMethod(String cell1, String cell2, String cell3, String cell4) {
+			int result = cell1 + cell2 + cell3;
+			String expected = cell4;
+			Assert.assertEquals("My Message", expected, result);
+		}
+	}
+
+
++------------

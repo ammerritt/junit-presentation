@@ -1,0 +1,15 @@
+DBUnit Appendix
+
+
+  With DBUnit on your classpath you can run the following command to create an xml file that DBUnit can import.
+  You can write any query that you want to filter the results being imported into your file
+  
++-------
+
+            Connection jdbcConnection = DriverManager.getConnection( "JDBCURL" );
+            IDatabaseConnection connection = new DatabaseConnection( jdbcConnection );
+            QueryDataSet partialDataSet = new QueryDataSet( connection );
+            partialDataSet.addTable( tableName, "SELECT * FROM " + myTableName );
+            FlatXmlDataSet.write( partialDataSet, new FileOutputStream( pathToOutFile ) );
+
++-------

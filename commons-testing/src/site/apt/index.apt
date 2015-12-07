@@ -1,0 +1,5 @@
+Introduction
+
+  The goal of the Commons testing framework is to provide a testing platform for commonly repeated testing patterns.
+  Provided with the commons testing framework is the capability to setup JNDI datasources and properties,
+  a custom JUnit runner to provide parameterized unit tests driven by excel sheet row data, and DBUnit and Liquibase annotations.

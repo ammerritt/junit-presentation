@@ -1,0 +1,59 @@
+Excel Spreadsheet Test Case Management
+
+  Create an excel spreadsheet and call it whatever you want.  For purposes of this documentation we will name our spreadsheet
+  MyTestCases.xls and place it in the src/test/resources folder of our Maven project.  We will only have one sheet in our Excel
+  file and call that sheet "Sheet1".  We could have multiple sheets if needed.
+
+MyTestCases.xls
+
+*-----------+-----------+-----------+-----------+
+|| Header1  || Header2  || Header3  || Header4  |
+*-----------+-----------+-----------+-----------+
+| Cell 1    | Cell 2    | Cell 3    | Cell 4    |
+*-----------+-----------+-----------+-----------+
+| Cell 1    | Cell 2    | Cell 3    | Cell 4    |
+*-----------+-----------+-----------+-----------+
+| ---       |           |           |           |
+*-----------+-----------+-----------+-----------+
+  
+  The file row should be delimited with the first cell having "---"  This tells the parser that there are no more rows to process
+  since you are allowed to have have empty strings in cells if your test case required it.
+  
+  You would then write a test method in this manner:
+
+Using Spring
+
++--------------
+
+  @RunWith(GSJUnitSpringRunner.class)
+  @ContextConfiguration(locations = { "classpath:myApplicationContext.xml", "classpath:mySecondApplicationContext.xml" })
+  public class MyTestClass {
+
+	@Test
+	@ExcelDataSource(path = "src/test/resources/MyTestCases.xls", sheetName = "Sheet1")
+	public void myTestMethod(String cell1, String cell2, String cell3, String cell4) {
+		int result = cell1 + cell2 + cell3;
+		String expected = cell4;
+		Assert.assertEquals("My Message", expected, result);
+	}
+  }
+  
++---------------
+
+Without Spring
+
++---------------
+
+  @RunWith(GSJUnitRunner.class)
+  public class MyTestClass {
+
+	@Test
+	@ExcelDataSource(path = "src/test/resources/MyTestCases.xls", sheetName = "Sheet1")
+	public void myTestMethod(String cell1, String cell2, String cell3, String cell4) {
+		int result = cell1 + cell2 + cell3;
+		String expected = cell4;
+		Assert.assertEquals("My Message", expected, result);
+	}
+  }
+  
++------------------

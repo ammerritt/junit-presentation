@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <orders order_id="1" customer_id="1" total="5.00" result="Success"/>
+  <orders order_id="2" customer_id="2" total="20.00" result="Success"/>
+  <orders order_id="3" customer_id="1" total="10.00" result="Success"/>
+</dataset>

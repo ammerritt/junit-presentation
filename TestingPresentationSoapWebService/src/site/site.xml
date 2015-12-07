@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Maven">
+  <body>
+    <links>
+      <item name="Merritt's Maven Site" href="//" />
+    </links>
+    <menu ref="reports" />
+  </body>
+</project>

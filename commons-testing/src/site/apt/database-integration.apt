@@ -1,0 +1,45 @@
+JUnit Database Integrated Tests
+
+  The GSJUnitRunner and GSJUnitSpringRunner provide annotations for you to setup and populate a database.  By setting up a JNDI
+  datasource in the jndi.xml file you can reference that datasource from your unit tests.  The datasource could be really any
+  database you want.  The commons-testing package provides Oracle and HSQLDB drivers for your convenience.
+  
+@CreateDatabase
+
+  The @CreateDatabase annotation provides a way for you to build out your tables, sequences, indexes, etc.  Currently this annotation
+  only supports Liquibase but support for other database creation methods will be added in the future.  For more information on 
+  Liquibase go to {{http://www.liquibase.org/}}  For tips and tricks to creating a Liquibase schema file check out the {{{liquibase.html} Liquibase Appendix}}
+
+  To use the @CreateDatabase annotation use the following syntax
+  
++-------
+
+  @CreateDatabase(databaseFile = "src/test/resources/database.xml", dataSource = "jdbc/myDataSource")
+
++-------
+
+  If you annotation multiple classes with the @CreateDatabase annotation the database will only be created once even though it's declared multiple
+  times.
+  
+@DBUnitInsertClean
+
+  DBUnit is a framework to populate your database with data.  Your data needs to be formatted in a simple xml format that dbunit can understand.
+  If you want to export data from an existing database into the DBUnit format check the {{{dbunit.html} DBUnit Appendix}} or visit the DBUnit homepage
+  for more information {{http://www.dbunit.org}} 
+
+  To use the @DBUnitInsertClean annotation use the following syntax
+  
++-------
+
+  @DBUnitInsertClean(dataSource = "jdbc/myDataSource", xmlDirectory = "src/test/resources/dbunit")
+
+      or
+      
+  @DBUnitInsertClean(dataSource = "jdbc/myDataSource", xmlFiles = { "src/test/resources/dbunit/test1.xml", "src/test/resources/dbunit/test2.xml"})
+  
++-------
+
+  The annotation can be used one of two ways.  The first way is to specify a directory where it will run all the xml files within that directory.  The second way
+  is to run only certain xml files that are enumerated in an array.  Unlike the CreateDatabase annotation where the database is created only once the DBUnitInsertClean
+  annotation will will drop and rebuild your data for every single unit test.
+

@@ -1,0 +1,39 @@
+Setting up JNDI Datasources and Properties
+
+  Create a jndi.xml file and place it on your test classpath.
+
+JNDI.XML
+
++---------------------------------------------------------------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+  <bean id="jndi" class="org.apache.xbean.spring.jndi.DefaultContext">
+    <property name="entries">
+      <map>
+        <entry key="java:jdbc/myDataSource">
+            <bean class="org.apache.commons.dbcp.BasicDataSource"
+                destroy-method="close" singleton="false">
+                <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
+                <property name="url" value="jdbc:hsqldb:mem:HSQL"/>
+                <property name="username" value="sa"/>
+                <property name="password" value=""/>
+                <property name="maxIdle" value="-1"/>
+                <property name="maxActive" value="-1"/>
+                <property name="maxWait" value="-1"/>
+            </bean>
+        </entry>
+        <entry key="java:mail.smtp.host" value="localhost"/>
+      </map>
+    </property>
+  </bean>
+</beans>
++---------------------------------------------------------------------------
+
+  You will now be able to access your datasource or properties anywhere in your code by using the following code:
+
++---------
+	Context ctx = new javax.naming.InitialContext();	
+	DataSource dataSource = (DataSource) ctx.lookup("java:jdbc/myDataSource");
+	String smtpHost = (String) ctx.lookup("java:mail.smtp.host");
++---------
