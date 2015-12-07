@@ -91,24 +91,23 @@ public class EncryptionPageSTBase implements WebDriverSeleniumTest {
 
     /**
      * This is another approach to verify the page is rendered correctly. 
-     * You have more code to write, but it is far easy to tell what broke when it did break.
+     * You have more code to write, but it is far easier to tell what broke when it did break.
      * The problem with using asserts is that it stops processing when the first one fails.
      * @throws Exception
      */
     @Test
-    @Ignore
     public void testPageSetup2() throws Exception {
         assertTrue("The encrypt form should be present.", encryptionPage.encryptFormPresent());
         assertTrue("The encrypt form should have a password field.", encryptionPage.encryptFormPasswordFieldPresent());
-        assertEquals("The encrypt form password field is not the correct size.", new Dimension(207, 22), encryptionPage.getEncryptFormPasswordFieldSize());
-        assertEquals("The encrypt form password field is not in the correct location.", new Point(77, 92), encryptionPage.getEncryptFormPasswordFieldLocation());
+        assertEquals("The encrypt form password field is not the correct size.", new Dimension(191, 19), encryptionPage.getEncryptFormPasswordFieldSize());
+        assertEquals("The encrypt form password field is not in the correct location.", new Point(77, 80), encryptionPage.getEncryptFormPasswordFieldLocation());
         assertTrue("The encrypt form should have a field for the encrypted password.", encryptionPage.encryptFormEncPasswordFieldPresent());
         assertTrue("The encrypt form should have a submit button.", encryptionPage.encryptFormButtonPresent());
 
         assertTrue("The decrypt form should be present.", encryptionPage.decryptFormPresent());
         assertTrue("The decrypt form should have a password field.", encryptionPage.decryptFormPasswordFieldPresent());
-        assertEquals("The decrypt form password field is not the correct size.", new Dimension(207, 22), encryptionPage.getDecryptFormPasswordFieldSize());
-        assertEquals("The decrypt form password field is not in the correct location.", new Point(77, 264), encryptionPage.getDecryptFormPasswordFieldLocation());
+        assertEquals("The decrypt form password field is not the correct size.", new Dimension(191, 19), encryptionPage.getDecryptFormPasswordFieldSize());
+        assertEquals("The decrypt form password field is not in the correct location.", new Point(77, 225), encryptionPage.getDecryptFormPasswordFieldLocation());
         assertTrue("The decrypt form should have a field for the encrypted password.", encryptionPage.decryptFormEncPasswordFieldPresent());
         assertTrue("The decrypt form should have a submit button.", encryptionPage.decryptFormButtonPresent());
     }
