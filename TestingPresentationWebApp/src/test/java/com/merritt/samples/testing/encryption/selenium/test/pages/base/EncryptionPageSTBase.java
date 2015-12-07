@@ -134,7 +134,6 @@ public class EncryptionPageSTBase implements WebDriverSeleniumTest {
         collector.checkThat("The decrypt form should have a submit button.", encryptionPage.decryptFormButtonPresent(), is(true));
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testPageSetup2andAHalf_Passes() throws Exception {
         //This could be broken into multiple tests as well; say 1 for each form, or even further...
