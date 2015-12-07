@@ -1,6 +1,10 @@
 package com.merritt.samples.testing.dao.impl;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -13,7 +17,9 @@ import org.dbunit.dataset.DataSetException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
@@ -50,6 +56,9 @@ public class OrdersJdbcDaoTest {
     @Inject
     private OrdersDao ordersDao;
 
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
+
     @BeforeClass
     public static void setUpBeforeClass() throws DataAccessException, NamingException, DataSetException, IOException {
         DatabaseTestingUtils.executeSqlScript(JNDI_DATASOURCE_LOOKUP_NAME, "create_tables.sql");
@@ -72,12 +81,22 @@ public class OrdersJdbcDaoTest {
     }
 
     @Test
+    public void testSelectByIdNotFound_WithRule() throws Exception {
+        exception.expect(ItemNotFoundException.class);
+        exception.expectMessage(String.format("Unable to find order with id: '%s'", TEST_ORDER_ID_NOT_FOUND));
+        ordersDao.selectById(TEST_ORDER_ID_NOT_FOUND);
+    }
+
+    @Test
     public void testSelectByIdFound() throws NamingException, SQLException, ItemNotFoundException {
         final Order order = ordersDao.selectById(TEST_ORDER_ID_1);
+        assertNotNull(order);
         assertEquals("Order ids should match;", TEST_ORDER_ID_1, order.getOrderId());
         assertEquals("Customer ids should match;", TEST_CUSTOMER_ID_1, order.getCustomerId());
         assertEquals("Totals should match;", TEST_TOTAL_1, order.getTotal(), 0);
         assertEquals("Results should match;", TEST_RESULT_1, order.getResult());
+        //NOTE: the following is the same as the previous but using hamcrest matchers
+        assertThat("Results should match;", order.getResult(), is(equalTo(TEST_RESULT_1)));
     }
 
     @Test
@@ -86,6 +105,7 @@ public class OrdersJdbcDaoTest {
         assertEquals("Order ids should match;", TEST_ORDER_ID_NEW, orderId);
 
         final Order order = ordersDao.selectById(TEST_ORDER_ID_NEW);
+        assertNotNull(order);
         assertEquals("Order ids should match;", TEST_ORDER_ID_NEW, order.getOrderId());
         assertEquals("Customer ids should match;", TEST_CUSTOMER_ID_NEW, order.getCustomerId());
         assertEquals("Totals should match;", TEST_TOTAL_NEW, order.getTotal(), 0);

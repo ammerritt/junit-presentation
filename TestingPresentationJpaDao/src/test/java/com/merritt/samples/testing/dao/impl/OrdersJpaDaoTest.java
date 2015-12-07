@@ -1,6 +1,7 @@
 package com.merritt.samples.testing.dao.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -89,6 +90,7 @@ public class OrdersJpaDaoTest {
     @Test
     public void testSelectByIdFound() throws NamingException, SQLException, ItemNotFoundException {
         final Order order = ordersJpaDao.selectById(TEST_ORDER_ID_1);
+        assertNotNull(order);
         assertEquals("Order ids should match;", TEST_ORDER_ID_1, order.getOrderId());
         assertEquals("Customer ids should match;", TEST_CUSTOMER_ID_1, order.getCustomerId());
         assertEquals("Totals should match;", TEST_TOTAL_1, order.getTotal(), 0);
@@ -101,6 +103,7 @@ public class OrdersJpaDaoTest {
         assertEquals("Order ids should match;", TEST_ORDER_ID_NEW, orderId);
 
         final Order order = ordersJpaDao.selectById(TEST_ORDER_ID_NEW);
+        assertNotNull(order);
         assertEquals("Order ids should match;", TEST_ORDER_ID_NEW, order.getOrderId());
         assertEquals("Customer ids should match;", TEST_CUSTOMER_ID_NEW, order.getCustomerId());
         assertEquals("Totals should match;", TEST_TOTAL_NEW, order.getTotal(), 0);
