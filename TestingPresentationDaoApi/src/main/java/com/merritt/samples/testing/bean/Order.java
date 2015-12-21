@@ -9,61 +9,52 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@SequenceGenerator( sequenceName = "ORDERS_SEQ", name = "ORDERS_SEQ_GEN", allocationSize = 1 )
-@Table( name = "orders" )
-public class Order
-{
+@SequenceGenerator(sequenceName = "ORDERS_SEQ", name = "ORDERS_SEQ_GEN", allocationSize = 1)
+@Table(name = "orders")
+public class Order {
     @Id
-    @GeneratedValue( generator = "ORDERS_SEQ_GEN", strategy = GenerationType.AUTO )
-    @Column( name = "order_id" )
+    @GeneratedValue(generator = "ORDERS_SEQ_GEN", strategy = GenerationType.AUTO)
+    @Column(name = "order_id")
     private long orderId = -1L;
-    
-    @Column( name = "customer_id" )
+
+    @Column(name = "customer_id")
     private long customerId = -1L;
-    
-    @Column( name = "total" )
+
+    @Column(name = "total")
     private double total;
-    
-    @Column( name = "result" )
+
+    @Column(name = "result")
     private String result = "";
-    
-    public long getOrderId()
-    {
+
+    public long getOrderId() {
         return orderId;
     }
-    
-    public void setOrderId( final long orderId )
-    {
+
+    public void setOrderId(final long orderId) {
         this.orderId = orderId;
     }
-    
-    public long getCustomerId()
-    {
+
+    public long getCustomerId() {
         return customerId;
     }
-    
-    public void setCustomerId( final long customerId )
-    {
+
+    public void setCustomerId(final long customerId) {
         this.customerId = customerId;
     }
-    
-    public double getTotal()
-    {
+
+    public double getTotal() {
         return total;
     }
-    
-    public void setTotal( final double total )
-    {
+
+    public void setTotal(final double total) {
         this.total = total;
     }
-    
-    public String getResult()
-    {
+
+    public String getResult() {
         return result;
     }
-    
-    public void setResult( final String result )
-    {
+
+    public void setResult(final String result) {
         this.result = result;
     }
 }
